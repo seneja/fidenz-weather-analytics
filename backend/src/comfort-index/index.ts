@@ -1,13 +1,13 @@
 import { scoreTemperature, scoreHumidity, scoreWindSpeed, scoreCloudiness } from './scoring';
 
 export interface WeatherData {
-  temp: number; // Temperature in Kelvin
-  humidity: number; // Humidity percentage
-  windSpeed: number; // Wind speed in m/s
-  clouds: number; // Cloudiness percentage
-  pressure: number; // Pressure in hPa
-  visibility: number; // Visibility in meters
-  description: string; // Weather description
+  temp: number;
+  humidity: number;
+  windSpeed: number;
+  clouds: number;
+  pressure: number;
+  visibility: number;
+  description: string;
 }
 
 export interface UnrankedCityResult {
