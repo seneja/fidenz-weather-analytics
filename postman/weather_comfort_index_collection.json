@@ -1,0 +1,90 @@
+{
+  "info": {
+    "_postman_id": "8bfa51c8-2b8e-4a6c-9c70-4d56d1c8eefd",
+    "name": "Weather Comfort Index API",
+    "description": "API collection for testing the Weather Comfort Index endpoints, including the protected weather stats and the public cache debug status.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Get Ranked Weather (Protected)",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{ACCESS_TOKEN}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3001/api/weather",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3001",
+          "path": [
+            "api",
+            "weather"
+          ]
+        },
+        "description": "Retrieves the list of cities sorted by comfort index. Requires a valid Auth0 Bearer token in the request header."
+      },
+      "response": []
+    },
+    {
+      "name": "Get Cache Status (Public)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3001/api/debug/cache",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3001",
+          "path": [
+            "api",
+            "debug",
+            "cache"
+          ]
+        },
+        "description": "Checks the cache status (HIT or MISS) and the timestamp for each city in the configuration."
+      },
+      "response": []
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "ACCESS_TOKEN",
+      "value": "your_auth0_jwt_token_here",
+      "type": "string"
+    }
+  ]
+}
