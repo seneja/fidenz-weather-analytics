@@ -1,4 +1,4 @@
-import { scoreTemperature, scoreHumidity, scoreWindSpeed, scoreCloudiness } from './scoring';
+import { scoreTemperature, scoreHumidity, scoreWindSpeed, scoreCloudiness, scoreVisibility } from './scoring';
 
 export interface WeatherData {
   temp: number;
@@ -22,21 +22,12 @@ export interface CityComfortResult extends UnrankedCityResult {
   rank: number;
 }
 
-/**
- * Converts Kelvin to Celsius and rounds to 2 decimal places.
- */
+
 export function kelvinToCelsius(kelvin: number): number {
   return parseFloat((kelvin - 273.15).toFixed(2));
 }
 
-/**
- * Calculates a single comfort index score (0-100) based on weather conditions.
- * Weights:
- * - Temperature: 40%
- * - Humidity: 30%
- * - Wind Speed: 15%
- * - Cloudiness: 15%
- */
+
 export function calculateComfortIndex(weather: WeatherData): number {
   const tempCelsius = kelvinToCelsius(weather.temp);
 
@@ -44,15 +35,12 @@ export function calculateComfortIndex(weather: WeatherData): number {
   const sHum = scoreHumidity(weather.humidity);
   const sWind = scoreWindSpeed(weather.windSpeed);
   const sCloud = scoreCloudiness(weather.clouds);
-
-  const score = (sTemp * 0.40) + (sHum * 0.30) + (sWind * 0.15) + (sCloud * 0.15);
+  const sVisibility = scoreVisibility(weather.visibility);
+  const score = (sTemp * 0.35) + (sHum * 0.25) + (sWind * 0.15) + (sCloud * 0.10) + (sVisibility * 0.15);
   return Math.round(score);
 }
 
-/**
- * Sorts cities by comfort score descending (and alphabetically by name as tie-breaker)
- * and assigns a sequential 1-based rank.
- */
+
 export function rankCities(cities: UnrankedCityResult[]): CityComfortResult[] {
   const sorted = [...cities].sort((a, b) => {
     if (b.comfortScore !== a.comfortScore) {

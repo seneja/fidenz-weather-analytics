@@ -1,47 +1,51 @@
 import React from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
-import { CloudSun, KeyRound } from 'lucide-react';
 import { ThemeToggle } from './ThemeToggle';
+import { Button } from './ui/Button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from './ui/Card';
+import { CloudRain } from 'lucide-react';
 
 export const Login: React.FC = () => {
-  const { loginWithRedirect } = useAuth0();
+  const { loginWithRedirect, isLoading } = useAuth0();
 
   return (
-    <div className="flex min-h-screen flex-col bg-gray-50 dark:bg-gray-900">
-      <header className="flex justify-end p-4">
+    <div className="flex min-h-screen flex-col bg-background relative overflow-hidden">
+      {/* Decorative background blur */}
+      <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] bg-accent/10 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-[-20%] right-[-10%] w-[40%] h-[40%] bg-info/10 rounded-full blur-[100px] pointer-events-none" />
+
+      <header className="flex justify-end p-6 z-10">
         <ThemeToggle />
       </header>
 
-      <div className="flex flex-1 items-center justify-center p-4">
-        <div className="w-full max-w-md rounded-2xl border border-gray-100 bg-white p-8 text-center shadow-xl dark:border-gray-700 dark:bg-gray-800">
-          <div className="mb-4 flex justify-center">
-            <div className="rounded-full bg-blue-50 p-4 dark:bg-blue-900/30">
-              <CloudSun className="h-12 w-12 text-blue-600 dark:text-blue-400" />
+      <main className="flex flex-1 items-center justify-center p-6 z-10">
+        <Card className="w-full max-w-lg border-none shadow-elevated bg-surface/80 backdrop-blur-xl">
+          <CardHeader className="text-center pb-2 pt-10">
+            <div className="mx-auto mb-6 bg-accent/10 p-4 rounded-2xl w-20 h-20 flex items-center justify-center">
+              <CloudRain className="w-10 h-10 text-accent" />
             </div>
-          </div>
-
-          <h1 className="text-3xl font-extrabold text-gray-900 dark:text-white">
-            Weather Comfort Index
-          </h1>
-          <p className="mx-auto mt-2 max-w-sm text-gray-500 dark:text-gray-400">
-            Compare and rank cities worldwide based on a custom weather comfort scoring algorithm.
-          </p>
-
-          <div className="mt-8">
-            <button
+            <CardTitle className="text-3xl font-bold tracking-tight">Atmos Analytics</CardTitle>
+            <CardDescription className="text-base mt-2 px-6">
+              Compare and rank global locations using our advanced weather comfort algorithms.
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="pt-8 pb-10 px-8">
+            <Button
+              size="lg"
+              className="w-full text-base h-14"
+              isLoading={isLoading}
               onClick={() => loginWithRedirect()}
-              className="flex w-full items-center justify-center gap-2 rounded-xl bg-blue-600 px-4 py-3 text-lg font-medium text-white shadow-lg shadow-blue-500/20 hover:bg-blue-700 active:bg-blue-800 dark:bg-blue-500 dark:hover:bg-blue-600"
             >
-              <KeyRound className="h-5 w-5" />
-              Sign In to Dashboard
-            </button>
-          </div>
-
-          <p className="mt-6 text-xs text-gray-400 dark:text-gray-500">
-            Secure authentication powered by Auth0.
-          </p>
-        </div>
-      </div>
+              Access Dashboard
+            </Button>
+          </CardContent>
+          <CardFooter className="justify-center border-t border-border/50 py-4">
+            <p className="text-xs text-muted-foreground font-medium uppercase tracking-widest">
+              Securely powered by Auth0
+            </p>
+          </CardFooter>
+        </Card>
+      </main>
     </div>
   );
 };

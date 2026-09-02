@@ -1,3 +1,89 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  :root {
+    /* Light Mode Tokens (Sophisticated Neutral) */
+    --background: 0 0% 98%;      /* #FAFAFA */
+    --surface: 0 0% 100%;        /* #FFFFFF */
+    --elevated: 0 0% 100%;       /* #FFFFFF */
+    
+    --primary: 222.2 47.4% 11.2%; /* Deep Navy/Charcoal */
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    --accent: 221 83% 53%;      /* Professional Blue */
+    --accent-foreground: 210 40% 98%;
+
+    --success: 142.1 76.2% 36.3%; /* Restrained Green */
+    --success-foreground: 355.7 100% 97.3%;
+    
+    --warning: 38 92% 50%;      /* Soft Amber */
+    --warning-foreground: 48 96% 89%;
+    
+    --error: 346.8 77.2% 49.8%;   /* Clear Red */
+    --error-foreground: 355.7 100% 97.3%;
+    
+    --info: 199 89% 48%;        /* Calming Blue */
+    --info-foreground: 210 40% 98%;
+
+    --border: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
+
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    /* Dark Mode Tokens (Deep, Professional, Low Fatigue) */
+    --background: 222 47% 7%;      /* Deep Slate */
+    --surface: 222 47% 11%;        /* Slightly lighter */
+    --elevated: 222 47% 15%;       /* For popovers/modals */
+    
+    --primary: 210 40% 98%;        /* Off-white */
+    --primary-foreground: 222.2 47.4% 11.2%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 217 91% 60%;         /* Vibrant but accessible Blue */
+    --accent-foreground: 210 40% 98%;
+
+    --success: 142.1 70% 45%; 
+    --success-foreground: 144.9 80.4% 10%;
+    
+    --warning: 48 96% 53%;
+    --warning-foreground: 38 92% 10%;
+    
+    --error: 346.8 77.2% 49.8%;
+    --error-foreground: 355.7 100% 97.3%;
+    
+    --info: 199 89% 48%;
+    --info-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-primary antialiased font-sans transition-colors duration-300;
+  }
+  
+  /* Focus rings for accessibility */
+  *:focus-visible {
+    @apply outline-none ring-2 ring-ring ring-offset-2 ring-offset-background;
+  }
+}
